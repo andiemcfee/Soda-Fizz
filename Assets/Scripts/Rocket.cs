@@ -23,7 +23,22 @@ public class Rocket : MonoBehaviour {
 
     }
 
-    void Thrust()
+	private void OnCollisionEnter(Collision collision)
+	{
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                Debug.Log("Youre OK!"); //todo remove line
+                //do nothing
+                break;
+            default:
+                Debug.Log("Dead!"); //todo remove line
+                //kill player, quickly restart level
+                break;
+        }
+	}
+
+	void Thrust()
     {
         float thrustThisFrame = rcsThrust * Time.deltaTime;
 
