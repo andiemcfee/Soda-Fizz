@@ -1,44 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
     public Rigidbody rigidBody;
     public AudioSource audioSource;
 
+    private int currentLevel = 0;
     [SerializeField] float rcsThrust = 100f;
-    [SerializeField] float rcsRotationThrust = 100f; 
+    [SerializeField] float rcsRotationThrust = 100f;
+    [SerializeField] float fallMultiplier = 2.5f;
+    [SerializeField] float lowFallMultiplier = 2f;
 
-	void Start () 
+	void Start ()
     {
         audioSource = GetComponent< AudioSource > ();
-        rigidBody = GetComponent<Rigidbody>(); //important!!
+        rigidBody = GetComponent<Rigidbody>();
 	}
 
-    void Update()
+    void Update() //calls hardFall, thrust, and rotate each frame
     {
+        hardFall();
         Thrust();
         Rotate();
 
     }
 
-	private void OnCollisionEnter(Collision collision)
-	{
-        switch (collision.gameObject.tag)
+    void hardFall() //applies extra gravity when the soda bottle is falling
+    {
+        if (rigidBody.velocity.y < 0)
         {
-            case "Friendly":
-                Debug.Log("Youre OK!"); //todo remove line
-                //do nothing
-                break;
-            default:
-                Debug.Log("Dead!"); //todo remove line
-                //kill player, quickly restart level
-                break;
+            rigidBody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+        else if (rigidBody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rigidBody.velocity += Vector3.up * Physics.gravity.y * (lowFallMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
+	void OnCollisionEnter(Collision collision) //switches levels
+	{
+		switch (collision.gameObject.tag)
+		{
+				case "Finish":
+                SceneManager.LoadScene(currentLevel + 1);
+					break;
+				default:
+					//do nothing
+					break;
+		}
 	}
 
-	void Thrust()
+	void Thrust()//handles upward movement and audio
     {
         float thrustThisFrame = rcsThrust * Time.deltaTime;
 
@@ -57,20 +70,22 @@ public class Rocket : MonoBehaviour {
         }
     }
 
-    void Rotate()
+    void Rotate() //handles user rotation
     {
         float rotationThisFrame = rcsRotationThrust * Time.deltaTime;
 
-        rigidBody.freezeRotation = true; //allows user to take manual control of rotation
+        //rigidBody.freezeRotation = true; //allows user to take sole manual control of rotation
 
         if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Rotate(Vector3.forward * rotationThisFrame);
+            //transform.Rotate(Vector3.forward * rotationThisFrame);
+            rigidBody.AddTorque(transform.right * rotationThisFrame);
         }
         else if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Rotate(-Vector3.forward* rotationThisFrame);
+            //transform.Rotate(-Vector3.forward* rotationThisFrame);
+            rigidBody.AddTorque(-transform.right * rotationThisFrame);
         }
-        rigidBody.freezeRotation = false; 
+        //rigidBody.freezeRotation = false; 
     }
 }
