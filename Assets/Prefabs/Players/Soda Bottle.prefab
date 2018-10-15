@@ -295,9 +295,10 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   audioSource: {fileID: 0}
   rcsThrust: 10000
-  rcsRotationThrust: 8000
+  rcsRotationThrust: 10000
   fallMultiplier: 9
   lowFallMultiplier: 9
+  timeBetweenLvls: 0.35
 --- !u!136 &136841778094910968
 CapsuleCollider:
   m_ObjectHideFlags: 1

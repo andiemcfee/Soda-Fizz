@@ -11,6 +11,9 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float rcsRotationThrust = 100f;
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowFallMultiplier = 2f;
+    [SerializeField] float timeBetweenLvls = 1f;
+    enum State { Dying, Alive, Transcending }
+    State state = State.Alive;
 
 	void Start ()
     {
@@ -42,16 +45,22 @@ public class Rocket : MonoBehaviour {
 	{
 		switch (collision.gameObject.tag)
 		{
-				case "Finish":
-                SceneManager.LoadScene(currentLevel + 1);
-					break;
-				default:
+			case "Finish":
+                state = State.Transcending;
+                Invoke("loadNextScene", timeBetweenLvls);
+                break;
+			default:
 					//do nothing
 					break;
 		}
 	}
 
-	void Thrust()//handles upward movement and audio
+	void loadNextScene() //loads next scene using a timer
+    {
+        SceneManager.LoadScene(currentLevel + 1);
+    }
+
+    void Thrust()//handles upward movement and audio
     {
         float thrustThisFrame = rcsThrust * Time.deltaTime;
 
@@ -74,18 +83,13 @@ public class Rocket : MonoBehaviour {
     {
         float rotationThisFrame = rcsRotationThrust * Time.deltaTime;
 
-        //rigidBody.freezeRotation = true; //allows user to take sole manual control of rotation
-
         if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow))
         {
-            //transform.Rotate(Vector3.forward * rotationThisFrame);
             rigidBody.AddTorque(transform.right * rotationThisFrame);
         }
         else if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow))
         {
-            //transform.Rotate(-Vector3.forward* rotationThisFrame);
             rigidBody.AddTorque(-transform.right * rotationThisFrame);
         }
-        //rigidBody.freezeRotation = false; 
     }
 }
