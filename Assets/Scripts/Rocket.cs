@@ -12,6 +12,8 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowFallMultiplier = 2f;
     [SerializeField] float timeBetweenLvls = 1f;
+    [SerializeField] float sodaLeft = 500;
+
     enum State { Dying, Alive, Transcending }
     State state = State.Alive;
 
@@ -26,7 +28,21 @@ public class Rocket : MonoBehaviour {
         hardFall();
         Thrust();
         Rotate();
+        depleteSoda();
 
+    }
+
+    void depleteSoda()
+    {
+        if (Input.GetKey(KeyCode.Space) && sodaLeft > 0)
+        {
+            sodaLeft -= 2;
+        }
+        else if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow)
+                 | Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow) && sodaLeft > 0)
+        {
+            sodaLeft -= 1;
+        }
     }
 
     void hardFall() //applies extra gravity when the soda bottle is falling
@@ -64,18 +80,21 @@ public class Rocket : MonoBehaviour {
     {
         float thrustThisFrame = rcsThrust * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (sodaLeft > 0)
         {
-            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
-
-            if (!audioSource.isPlaying)
+            if (Input.GetKey(KeyCode.Space))
             {
-                audioSource.Play();
+                rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
             }
-        }
-        else
-        {
-            audioSource.Stop();
+            else
+            {
+                audioSource.Stop();
+            }
         }
     }
 
@@ -83,13 +102,16 @@ public class Rocket : MonoBehaviour {
     {
         float rotationThisFrame = rcsRotationThrust * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow))
+        if (sodaLeft > 0)
         {
-            rigidBody.AddTorque(transform.right * rotationThisFrame);
-        }
-        else if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow))
-        {
-            rigidBody.AddTorque(-transform.right * rotationThisFrame);
+            if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.LeftArrow))
+            {
+                rigidBody.AddTorque(transform.right * rotationThisFrame);
+            }
+            else if (Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.RightArrow))
+            {
+                rigidBody.AddTorque(-transform.right * rotationThisFrame);
+            }
         }
     }
 }
