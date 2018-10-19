@@ -5,6 +5,7 @@ public class Rocket : MonoBehaviour {
 
     public Rigidbody rigidBody;
     public AudioSource audioSource;
+    [SerializeField] ParticleSystem fizz;
 
     private int currentLevel = 0;
     [SerializeField] float rcsThrust = 100f;
@@ -12,7 +13,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] float lowFallMultiplier = 2f;
     [SerializeField] float timeBetweenLvls = 1f;
-    [SerializeField] float sodaLeft = 500;
+    [SerializeField] int sodaLeft = 500;
 
     enum State { Dying, Alive, Transcending }
     State state = State.Alive;
@@ -85,6 +86,7 @@ public class Rocket : MonoBehaviour {
             if (Input.GetKey(KeyCode.Space))
             {
                 rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+                fizz.Play();
 
                 if (!audioSource.isPlaying)
                 {
@@ -94,7 +96,12 @@ public class Rocket : MonoBehaviour {
             else
             {
                 audioSource.Stop();
+                fizz.Stop();
             }
+        }
+        else if (sodaLeft <= 100)
+        {
+            rigidBody.mass = 0;
         }
     }
 
