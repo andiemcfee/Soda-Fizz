@@ -7,7 +7,8 @@ public class Rocket : MonoBehaviour {
     public AudioSource audioSource;
     [SerializeField] ParticleSystem fizz;
 
-    private int currentLevel = 0;
+    int currentLevel;
+    int currentBuildIndex;
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float rcsRotationThrust = 100f;
     [SerializeField] float fallMultiplier = 2.5f;
@@ -22,6 +23,9 @@ public class Rocket : MonoBehaviour {
     {
         audioSource = GetComponent< AudioSource > ();
         rigidBody = GetComponent<Rigidbody>();
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log("Active Scene name is: " + scene.name + "\nActive Scene index: " + scene.buildIndex);
+        currentBuildIndex = scene.buildIndex;
 	}
 
     void Update() //calls hardFall, thrust, and rotate each frame
@@ -63,8 +67,11 @@ public class Rocket : MonoBehaviour {
 		switch (collision.gameObject.tag)
 		{
 			case "Finish":
+                Invoke("loadNextLevel", timeBetweenLvls);
+                break;
+            case "Unfriendly":
                 state = State.Transcending;
-                Invoke("loadNextScene", timeBetweenLvls);
+                Invoke("restartLevel", timeBetweenLvls);
                 break;
 			default:
 					//do nothing
@@ -72,9 +79,20 @@ public class Rocket : MonoBehaviour {
 		}
 	}
 
-	void loadNextScene() //loads next scene using a timer
+	void loadNextLevel() //loads next scene using a timer
     {
-        SceneManager.LoadScene(currentLevel + 1);
+        currentLevel = currentBuildIndex + 1;
+        if (currentLevel == 3)
+        {
+            currentLevel = 0;
+        }
+        SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
+        state = State.Transcending;
+    }
+
+    void restartLevel() //reloads the same scene if the player "dies"
+    {
+        SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
     }
 
     void Thrust()//handles upward movement and audio

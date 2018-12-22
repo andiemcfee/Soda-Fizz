@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Friendly
   - Start
+  - Unfriendly
   layers:
   - Default
   - TransparentFX
