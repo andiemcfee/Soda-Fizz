@@ -92,7 +92,7 @@ public class Rocket : MonoBehaviour {
 
     void restartLevel() //reloads the same scene if the player "dies"
     {
-        SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
+        SceneManager.LoadScene(currentBuildIndex, LoadSceneMode.Single);
     }
 
     void Thrust()//handles upward movement and audio
