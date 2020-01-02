@@ -4818,14 +4818,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 54467196392712568}
-  audioSource: {fileID: 0}
   fizz: {fileID: 198051012509179988}
+  introMusic: {fileID: 7798448408523713045, guid: 553109ff342c54b6d947e65093853926,
+    type: 3}
+  loopingMusic: {fileID: 6422982693376383971, guid: cb2354df66efb494f956bbcd2fcfaa32,
+    type: 3}
+  isTransitioning: 0
+  isRestarting: 0
   shake: {fileID: 0}
+  startEndTransition: {fileID: 0}
   rcsThrust: 11500
   rcsRotationThrust: 9000
   fallMultiplier: 9
   lowFallMultiplier: 9
-  timeBetweenLvls: 5
+  timeBetweenLvls: 2
   sodaLeft: 5000
   thrustMultiplier: 8.5
   rotationMultiplier: 3000

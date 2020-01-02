@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 934f7a40db40042db9cba36a9f666090
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sodabottle: {fileID: 1281496529757098, guid: c47eada19467244fe8ba4ed802d53fff,
+      type: 3}
+  - rocket: {instanceID: 0}
+  - anim: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

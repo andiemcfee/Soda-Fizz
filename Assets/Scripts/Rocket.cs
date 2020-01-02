@@ -5,10 +5,15 @@ using System.Collections;
 public class Rocket : MonoBehaviour {
 
     public Rigidbody rigidBody;
-    public AudioSource audioSource;
     [SerializeField] ParticleSystem fizz;
-   
-    public CameraShake shake;
+    public AudioSource introMusic;
+    public AudioSource loopingMusic;
+    public bool isTransitioning;
+    public bool isRestarting;
+
+
+    //public CameraShake shake;
+    public StartEndTransition startEndTransition;
 
 
     int currentLevel;
@@ -22,31 +27,33 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float thrustMultiplier = 1.75f;
     [SerializeField] float rotationMultiplier = 1.5f;
 
-
-
     //public int scoreNum;
 
     enum State { Dying, Alive, Transcending }
     State state = State.Alive;
     private bool firstFountainEnter = true;
     private bool isPlayable = false;
+    private bool isIntroPlaying;
+    private bool isLoopPlaying;
 
 	void Start ()
     {
         //grabbing components
-        audioSource = GetComponent<AudioSource> ();
         rigidBody = GetComponent<Rigidbody>();
-        GameObject.Find("Static Main Camera").GetComponent<CameraShake>();
+        GameObject.Find("Canvas").GetComponent<StartEndTransition>();
+        //GameObject.Find("Static Main Camera").GetComponent<CameraShake>();
         //scoreNum = GameObject.Find("Static Main Camera").GetComponent<ScoringSys>().scoreNum;
 
         //scene swapping stuff
         Scene scene = SceneManager.GetActiveScene();
         Debug.Log("Active Scene name is: " + scene.name + "\nActive Scene index: " + scene.buildIndex);
         currentBuildIndex = scene.buildIndex;
+        isTransitioning = false;
 
         isPlayable = false;
         Invoke("MakePlayable", 3f);
-	}
+
+    }
 
     void Update() //calls hardFall, thrust, and rotate each frame
     {
@@ -57,6 +64,7 @@ public class Rocket : MonoBehaviour {
             Rotate();
         }
         depleteSoda();
+        //AudioController();
     }
 
     void depleteSoda()
@@ -89,9 +97,11 @@ public class Rocket : MonoBehaviour {
 		switch (collision.gameObject.tag)
 		{
 			case "Finish":
+                isTransitioning = true;
+                startEndTransition.SetFBoolTrue();
                 Invoke("loadNextLevel", timeBetweenLvls);
-                shake.Shake(shake.shakeDuration);
-                shake.isShaking = false;
+                //shake.Shake(shake.shakeDuration);
+                //shake.isShaking = false;
                 isPlayable = false;
                 //scoreNum = 5000 - sodaLeft;
                 break;
@@ -118,20 +128,26 @@ public class Rocket : MonoBehaviour {
 	void loadNextLevel() //loads next scene using a timer
     {
         currentLevel = currentBuildIndex + 1;
-        if (currentLevel == 6)
+        if (currentLevel == 4)
         {
-            currentLevel = 0;
+            currentLevel = 7;
         }
         isPlayable = false;
         SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
+        isRestarting = false;
+        startEndTransition.SetRBoolFalse();
+        isTransitioning = false;
+        startEndTransition.SetFBoolFalse();
         Invoke("MakePlayable", 3f);
 
         state = State.Transcending;
-    }
+    } 
 
     void restartLevel() //reloads the same scene if the player "dies"
     {
         SceneManager.LoadScene(currentBuildIndex, LoadSceneMode.Single);
+        isRestarting = true;
+        startEndTransition.SetRBoolTrue();
     }
 
     void MakePlayable()
@@ -182,5 +198,4 @@ public class Rocket : MonoBehaviour {
             }
         }
     }
-    
 }
