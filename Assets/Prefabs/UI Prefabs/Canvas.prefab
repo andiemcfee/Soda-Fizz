@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -810,8 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934f7a40db40042db9cba36a9f666090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sodabottle: {fileID: 1281496529757098, guid: c47eada19467244fe8ba4ed802d53fff, type: 3}
-  rocket: {fileID: 0}
   anim: {fileID: 2029549162992429918}
 --- !u!1 &2029549163136219038
 GameObject:

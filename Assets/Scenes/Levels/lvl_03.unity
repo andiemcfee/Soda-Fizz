@@ -200,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 3315365419690180120, guid: 72e0c1a2c8b87451f917eff1afbc31ae,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3315365419690180124, guid: 72e0c1a2c8b87451f917eff1afbc31ae,
         type: 3}
@@ -358,7 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934f7a40db40042db9cba36a9f666090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sodabottle: {fileID: 1985925607}
   anim: {fileID: 40719366}
 --- !u!224 &40719368 stripped
 RectTransform:
@@ -1883,12 +1882,6 @@ PrefabInstance:
       objectReference: {fileID: 40719367}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c47eada19467244fe8ba4ed802d53fff, type: 3}
---- !u!1 &1985925607 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1281496529757098, guid: c47eada19467244fe8ba4ed802d53fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1985925605}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2106934472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2992593176116510501, guid: 161ff5e0235d5488c81ad0d4d855ada3,

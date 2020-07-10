@@ -119,6 +119,8 @@ public class Rocket : MonoBehaviour {
                     firstFountainEnter = false;
                 }
                 break;
+            case "speedBoard":
+
             default:
                 //do nothing
                 break;
@@ -128,7 +130,7 @@ public class Rocket : MonoBehaviour {
 	void loadNextLevel() //loads next scene using a timer
     {
         currentLevel = currentBuildIndex + 1;
-        if (currentLevel == 4)
+        if (currentLevel == 5)
         {
             currentLevel = 7;
         }

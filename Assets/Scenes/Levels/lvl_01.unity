@@ -373,6 +373,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2029549162992429913, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2029549162992429917, guid: 0b2603a0fa8d549ada2abd812ca25f61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -476,6 +481,21 @@ PrefabInstance:
     - target: {fileID: 2029549162992429917, guid: 0b2603a0fa8d549ada2abd812ca25f61,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162992429917, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162992429917, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162992429917, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2029549162992429918, guid: 0b2603a0fa8d549ada2abd812ca25f61,
@@ -582,6 +602,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549161782713551, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549161782713551, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549161782713551, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162673950395, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -231
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162747627761, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549163136219039, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029549162626328595, guid: 0b2603a0fa8d549ada2abd812ca25f61,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -148
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2603a0fa8d549ada2abd812ca25f61, type: 3}
@@ -10735,14 +10790,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Static Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 985147781, guid: 96c39318b806c4540bf96799bf320165, type: 3}
-      propertyPath: shakeDuration
-      value: 0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 985147781, guid: 96c39318b806c4540bf96799bf320165, type: 3}
-      propertyPath: timeInShakeLeft
-      value: 0.17
-      objectReference: {fileID: 0}
     - target: {fileID: 4920771639432480, guid: 96c39318b806c4540bf96799bf320165, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.24
@@ -10786,6 +10833,14 @@ PrefabInstance:
     - target: {fileID: 4920771639432480, guid: 96c39318b806c4540bf96799bf320165, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 985147781, guid: 96c39318b806c4540bf96799bf320165, type: 3}
+      propertyPath: shakeDuration
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 985147781, guid: 96c39318b806c4540bf96799bf320165, type: 3}
+      propertyPath: timeInShakeLeft
+      value: 0.17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c39318b806c4540bf96799bf320165, type: 3}
